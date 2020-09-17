@@ -13,7 +13,7 @@ public class Consonants {
         int cnt = 0;
         StringBuilder sb = new StringBuilder();
         for (char c : str.toCharArray()) {
-            if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')) {
+            if (!Character.isLetter(c)) {
                 sb.append(c);
                 continue;
             }
@@ -24,7 +24,7 @@ public class Consonants {
                 cnt++;
             }
         }
-        System.out.println("number of consonants is: " + cnt);
-        System.out.println("after replace, the str is: " + sb.toString());
+        System.out.println("the number of consonants is: " + cnt);
+        System.out.println("after replace, the string is: " + sb.toString());
     }
 }

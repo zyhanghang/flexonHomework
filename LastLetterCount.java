@@ -11,31 +11,41 @@ public class LastLetterCount {
 
     public void countAndSwitch(String str) {
         String[] words = str.split(" ");
+        // the number of words ending s/y
         int cntEndS = 0;
         int cntEndY = 0;
-        // the first word index that ending s/y
-        int firstEndSIndex = -1;
-        int firstEndYIndex = -1;
+        // the first word's index that ending s/y
+        int firstIdxEndS = -1;
+        int firstIdxEndY = -1;
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             if (word.charAt(word.length()-1) == 's' || word.charAt(word.length()-1) == 'S') {
                 if (cntEndS == 0) {
-                    firstEndSIndex = i;
+                    firstIdxEndS = i;
                 }
                 cntEndS++;
             } else if (word.charAt(word.length()-1) == 'y' || word.charAt(word.length()-1) == 'Y') {
                 if (cntEndY == 0) {
-                    firstEndYIndex = i;
+                    firstIdxEndY = i;
                 }
                 cntEndY++;
             }
         }
 
         // we have words ending in s and y separately
-        if (firstEndSIndex != -1 && firstEndYIndex != -1) {
-            String temp = words[firstEndSIndex];
-            words[firstEndSIndex] = words[firstEndYIndex];
-            words[firstEndYIndex] = temp;
+        if (firstIdxEndS != -1 && firstIdxEndY != -1) {
+            String temp = words[firstIdxEndS];
+            words[firstIdxEndS] = words[firstIdxEndY];
+            words[firstIdxEndY] = temp;
+
+            if (words[firstIdxEndS].charAt(0) >= 'A' && words[firstIdxEndS].charAt(0) <= 'Z') { // Capitalize another word's first letter
+                words[firstIdxEndS] = Utils.lowwerFirstChar(words[firstIdxEndS]);
+                words[firstIdxEndY] = Utils.upperFirstChar(words[firstIdxEndY]);
+            }
+            if (words[firstIdxEndY].charAt(0) >= 'A' && words[firstIdxEndY].charAt(0) <= 'Z') { // Capitalize another word's first letter
+                words[firstIdxEndY] = Utils.lowwerFirstChar(words[firstIdxEndY]);
+                words[firstIdxEndS] = Utils.upperFirstChar(words[firstIdxEndS]);
+            }
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < words.length; i++) {

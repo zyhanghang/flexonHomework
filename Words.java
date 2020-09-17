@@ -16,6 +16,7 @@ public class Words {
         String[] words = str.split(" ");
         Map<String, Integer> map = new HashMap<>();
         for (String word : words) {
+            word = Utils.purify(word);
             map.put(word, map.getOrDefault(word, 0) + 1);
         }
         // display
